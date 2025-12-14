@@ -3,189 +3,476 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MD. ABIDUL ISLAM - Portfolio</title>
+    <title>MD. ABIDUL ISLAM - Cybersecurity Portfolio</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background:#0d1b2a;
-            color:white;
+            box-sizing: border-box;
         }
-        header {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            padding: 40px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e27;
+            color: #e0e0e0;
+            overflow-x: hidden;
         }
-        section {
-            padding: 40px;
-            max-width: 900px;
-            margin: auto;
-            border-radius:15px;
-            box-shadow:0 6px 20px rgba(0,0,0,0.3);
-            background:#1b263b;
-            transition: 0.3s;
-            margin-bottom: 20px;
-        }
-        section.active {
-            border: 2px solid #287bff;
-            box-shadow: 0 0 15px #287bff;
-        }
-        .certificates {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .cert-card {
-            background: #2c3e50;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .cert-card img {
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 8px;
-            background: #1e3c72;
-            cursor: pointer;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
         }
-        .cert-card::before{
-            content:"Certificate";
-            display:block;
-            color:#9ecbff;
-            font-size:0.9rem;
-            margin-bottom:8px;
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(41, 128, 185, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(142, 68, 173, 0.1) 0%, transparent 50%);
+            animation: bgMove 20s ease-in-out infinite;
         }
-        .glow-btn{
-            padding:12px 20px;
-            background:#287bff;
-            border:none;
-            border-radius:10px;
-            color:white;
-            font-weight:bold;
-            cursor:pointer;
-            box-shadow:0 0 10px #4da3ff, 0 0 20px #4da3ff;
-            transition:0.3s;
+
+        @keyframes bgMove {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-50px, -50px); }
         }
-        .glow-btn:hover{
-            box-shadow:0 0 15px #1e90ff, 0 0 30px #1e90ff;
-            transform:scale(1.05);
-        }
-        .card-hover:hover{
-            transform:translateY(-6px);
-            box-shadow:0 6px 20px rgba(0,0,0,0.5) !important;
-        }
+
+        /* Navigation */
         nav {
-            background:#287bff;
-            padding:15px;
-            text-align:center;
-            box-shadow:0 4px 10px rgba(0,0,0,0.3);
+            background: rgba(26, 31, 58, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid rgba(52, 152, 219, 0.3);
         }
-        nav a{
-            color:white;
-            margin:0 15px;
-            font-weight:bold;
-            text-decoration:none;
-            transition:0.3s;
+
+        nav a {
+            color: #e0e0e0;
+            margin: 0 20px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
         }
-        nav a:hover{
-            color:#ffdd57;
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3498db;
+            transition: width 0.3s;
         }
-        html{
-            scroll-behavior:smooth;
+
+        nav a:hover::after {
+            width: 100%;
         }
-        .fade{
-            animation: fadeIn 1s ease-in-out;
+
+        nav a:hover {
+            color: #3498db;
         }
-        @keyframes fadeIn{
-            from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);}
+
+        nav a.active-link {
+            color: #3498db;
         }
+
+        nav a.active-link::after {
+            width: 100%;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 0.5; }
+        }
+
+        .profile-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-pic {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 10px;
+        }
+
+        .info-text {
+            font-size: 1.05rem;
+            opacity: 0.85;
+            margin: 8px 0;
+        }
+
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 50px 40px;
+            background: rgba(26, 31, 58, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            transition: all 0.3s;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(52, 152, 219, 0.3);
+            border-color: rgba(52, 152, 219, 0.5);
+        }
+
+        section.active-section {
+            border: 3px solid #3498db !important;
+            box-shadow: 0 0 40px rgba(52, 152, 219, 0.8), 0 0 80px rgba(52, 152, 219, 0.4), 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+            animation: glowPulse 2s ease-in-out infinite !important;
+            transform: translateY(-5px) !important;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { 
+                box-shadow: 0 0 40px rgba(52, 152, 219, 0.8), 0 0 80px rgba(52, 152, 219, 0.4), 0 8px 32px rgba(0, 0, 0, 0.4);
+                border-color: #3498db;
+            }
+            50% { 
+                box-shadow: 0 0 60px rgba(52, 152, 219, 1), 0 0 120px rgba(52, 152, 219, 0.6), 0 8px 32px rgba(0, 0, 0, 0.4);
+                border-color: #5dade2;
+            }
+        }
+
         h2 {
-            padding: 10px;
-            border-radius:10px;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: #3498db;
+            position: relative;
+            padding-bottom: 15px;
         }
-        #skills ul li, #experience p, #about p, #projects p {
-            font-weight:bold;
-            font-size:1.15rem;
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #8e44ad);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.6rem;
+            color: #5dade2;
+            margin: 30px 0 15px;
+        }
+
+        p, li {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+        }
+
+        /* Certificates Grid */
+        .certificates {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .cert-card {
+            background: rgba(44, 62, 80, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(52, 152, 219, 0.4);
+            border-color: #3498db;
+        }
+
+        .cert-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            transition: all 0.3s;
+        }
+
+        .cert-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .cert-label {
+            color: #5dade2;
+            font-size: 0.85rem;
             margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
+
+        /* Skills List */
+        #skills ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        #skills li {
+            padding: 12px 20px;
+            margin: 10px 0;
+            background: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        #skills li:hover {
+            background: rgba(52, 152, 219, 0.2);
+            transform: translateX(10px);
+        }
+
+        /* Experience & Education badges */
+        .experience-item, .education-item {
+            padding: 15px 25px;
+            margin: 15px 0;
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(52, 152, 219, 0.1));
+            border-radius: 10px;
+            border-left: 5px solid #2ecc71;
+            transition: all 0.3s;
+        }
+
+        .experience-item:hover, .education-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .education-item {
+            border-left-color: #e67e22;
+            background: linear-gradient(135deg, rgba(230, 126, 34, 0.1), rgba(52, 152, 219, 0.1));
+        }
+
+        .education-item:hover {
+            box-shadow: 0 5px 20px rgba(230, 126, 34, 0.3);
+        }
+
+        .education-item h3 {
+            color: #f39c12;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .education-item p {
+            margin: 5px 0;
+            font-size: 1.05rem;
+        }
+
+        /* Buttons */
+        .glow-btn {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+            margin: 20px 10px;
+        }
+
+        .glow-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        .glow-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Contact Links */
         #contact a {
-            color:#4da3ff;
-            text-decoration:none;
+            color: #3498db;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
         }
+
         #contact a:hover {
-            text-decoration:underline;
+            color: #5dade2;
+            border-bottom-color: #5dade2;
         }
-    
-        /* Certificate Modal */
-        .modal{
-            display:none;
-            position:fixed;
-            z-index:2000;
-            left:0;top:0;
-            width:100%;height:100%;
-            background:rgba(0,0,0,0.85);
-            justify-content:center;
-            align-items:center;
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
         }
-        .modal img{
-            max-width:90%;
-            max-height:90%;
-            border-radius:12px;
-            box-shadow:0 0 25px #4da3ff;
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(52, 152, 219, 0.5);
+            animation: modalZoom 0.3s;
         }
-        .modal span{
-            position:absolute;
-            top:20px;right:30px;
-            font-size:2.5rem;
-            color:white;
-            cursor:pointer;
+
+        @keyframes modalZoom {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
+
+        .modal-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #3498db;
+            transform: rotate(90deg);
+        }
+
+        /* Footer */
         footer {
             text-align: center;
-            padding: 20px;
-            background: #1b263b;
-            color: #9ecbff;
+            padding: 30px;
+            background: rgba(26, 31, 58, 0.9);
+            color: #7f8c8d;
+            margin-top: 50px;
+            border-top: 2px solid rgba(52, 152, 219, 0.3);
+        }
+
+        /* Scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            nav a { margin: 0 10px; font-size: 0.9rem; }
+            section { padding: 30px 20px; margin: 20px; }
+            .certificates { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#certs">Certificates</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+    <div class="bg-animation"></div>
+
+    <nav id="mainNav">
+        <a href="javascript:void(0)" data-target="about">About</a>
+        <a href="javascript:void(0)" data-target="education">Education</a>
+        <a href="javascript:void(0)" data-target="experience">Experience</a>
+        <a href="javascript:void(0)" data-target="skills">Skills</a>
+        <a href="javascript:void(0)" data-target="certs">Certificates</a>
+        <a href="javascript:void(0)" data-target="projects">Projects</a>
+        <a href="javascript:void(0)" data-target="contact">Contact</a>
     </nav>
+
     <header>
-        <div style="display:flex; flex-direction:column; align-items:center;">
-            <div style="width:140px; height:140px; border-radius:50%; border:4px solid white; margin-bottom:20px; background: linear-gradient(135deg, #4da3ff, #287bff); display: flex; align-items: center; justify-content: center; font-size: 3rem;">👨‍💻</div>
-            <h1 style="font-size:2.5rem; margin:0;">MD. ABIDUL ISLAM</h1>
-            <p style="margin-top:10px; font-size:1.2rem; opacity:0.9;">• Cybersecurity Enthusiast • Networking • Student</p>
-            <p style="margin-top:5px; font-size:1rem; opacity:0.9;">B.Sc. in CSE – American International University–Bangladesh (AIUB)</p>
-            <p style="margin-top:5px; font-size:1rem; opacity:0.9;">📧 abidjihan1123@gmail.com</p>
+        <div class="profile-container">
+            <div class="profile-pic">👨‍💻</div>
+            <h1>MD. ABIDUL ISLAM</h1>
+            <p class="subtitle">🔒 Cybersecurity Enthusiast • 🌐 Networking Specialist • 🎓 Student</p>
+            <p class="info-text">B.Sc. in CSE – American International University–Bangladesh (AIUB)</p>
+            <p class="info-text">📧 abidjihan1123@gmail.com</p>
         </div>
     </header>
 
-    <section id="about" class="fade">
+    <section id="about">
         <h2>About Me</h2>
         <p>
             I am a B.Sc. in CSE student at American International University–Bangladesh (AIUB), focusing on cybersecurity, networking, and emerging technologies. My experience includes completing several Cisco certification programs and participating in hands-on projects that enhance practical understanding of security and network systems.
         </p>
         <h3>Course Completion</h3>
-        <ol style="line-height:1.8; font-size:1.05rem;">
+        <ol>
             <li>CCNA – Cisco Certified Network Associate</li>
             <li>CCNP – Cisco Certified Network Professional</li>
             <li>DevNet – Cisco DevNet Associate</li>
@@ -200,145 +487,221 @@
         </ol>
     </section>
 
-    <section id="experience" class="fade">
-        <h2>Experience</h2>
-        <p><strong>• Finalist – Cisco National Skill Competition 2025 </strong></p>
-        <p><strong>• Participated in multiple CTF (Capture The Flag) competitions</strong></p>
-        <p><strong>• Ranked in the Top 5% on TryHackMe</strong></p>
+    <section id="education">
+        <h2>Educational Background</h2>
+        
+        <div class="education-item">
+            <h3>🎓 Bachelor of Science in Computer Science & Engineering</h3>
+            <p><strong>American International University–Bangladesh (AIUB)</strong></p>
+            <p>Currently Pursuing | Expected Graduation: [Year]</p>
+        </div>
+
+        <div class="education-item">
+            <h3>📚 Higher Secondary Certificate (HSC)</h3>
+            <p><strong>Rajab Ali Memorial Science College, Sirajganj</strong></p>
+            <p>Year: 2021 | Result: GPA 5.00</p>
+        </div>
+
+        <div class="education-item">
+            <h3>📚 Secondary School Certificate (SSC)</h3>
+            <p><strong>Sristy Central School and College, Sirajganj</strong></p>
+            <p>Year: 2019 | Result: GPA 5.00</p>
+        </div>
+
+        <div class="education-item">
+            <h3>📚 Junior School Certificate (JSC)</h3>
+            <p><strong>Sristy Central School and College, Sirajganj</strong></p>
+            <p>Year: 2016 | Result: GPA 5.00</p>
+        </div>
+
+        <div class="education-item">
+            <h3>📚 Primary School Certificate (PSC)</h3>
+            <p><strong>Sirajganj Collectorate School and College</strong></p>
+            <p>Year: 2013 | Result: GPA 5.00</p>
+        </div>
     </section>
 
-    <section id="skills" class="fade">
-        <h2>Skills</h2>
-        <ul style="line-height:1.8; font-size:1.1rem;">
-            <li>• Cybersecurity Fundamentals</li>
-            <li>• Networking</li>
-            <li>• API Security Basics</li>
-            <li>• Linux & Shell Scripting</li>
-            <li>• Packet Analysis (Wireshark)</li>
+    <section id="experience">
+        <h2>Experience & Achievements</h2>
+        <div class="experience-item">
+            <p><strong>🏆 Finalist – Cisco National Skill Competition 2025</strong></p>
+        </div>
+        <div class="experience-item">
+            <p><strong>🚩 Participated in multiple CTF (Capture The Flag) competitions</strong></p>
+        </div>
+        <div class="experience-item">
+            <p><strong>⭐ Ranked in the Top 5% on TryHackMe</strong></p>
+        </div>
+        <div class="experience-item">
+            <p><strong>🛡️ Active on LetsDefend – 2000+ Points | 83% Success Rate</strong></p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Technical Skills</h2>
+        <ul>
+            <li>🔐 Cybersecurity Fundamentals</li>
+            <li>🌐 Networking & Infrastructure</li>
+            <li>🔌 API Security Basics</li>
+            <li>🐧 Linux & Shell Scripting</li>
+            <li>📊 Packet Analysis (Wireshark)</li>
         </ul>
     </section>
 
-    <section id="certs" class="fade">
-        <h2>Certificates</h2>
+    <section id="certs">
+        <h2>Certifications</h2>
         <div class="certificates">
-            <div class="cert-card card-hover">
-                <img class="cert-img" src="cert_ccna_introduction_to_networks.png" alt="CCNA Introduction to Networks" />
+            <div class="cert-card" onclick="openModal(this)">
+                <div class="cert-label">Certificate</div>
+                <img src="cert_ccna_introduction_to_networks.png" alt="CCNA Introduction to Networks" />
                 <p>CCNA – Introduction to Networks</p>
             </div>
-            <div class="cert-card card-hover">
-                <img class="cert-img" src="cert_ccna_switching_routing_wireless.png" alt="CCNA Switching, Routing & Wireless" />
+            <div class="cert-card" onclick="openModal(this)">
+                <div class="cert-label">Certificate</div>
+                <img src="cert_ccna_switching_routing_wireless.png" alt="CCNA Switching, Routing & Wireless" />
                 <p>CCNA – Switching, Routing & Wireless Essentials</p>
             </div>
-            <div class="cert-card card-hover">
-                <img class="cert-img" src="cert_ccna_enterprise_networking_security.png" alt="CCNA Enterprise Networking & Security" />
+            <div class="cert-card" onclick="openModal(this)">
+                <div class="cert-label">Certificate</div>
+                <img src="cert_ccna_enterprise_networking_security.png" alt="CCNA Enterprise Networking & Security" />
                 <p>CCNA – Enterprise Networking, Security & Automation</p>
             </div>
-            <div class="cert-card card-hover">
-                <img class="cert-img" src="cert_ccnp_enterprise.png" alt="CCNP Enterprise" />
+            <div class="cert-card" onclick="openModal(this)">
+                <div class="cert-label">Certificate</div>
+                <img src="cert_ccnp_enterprise.png" alt="CCNP Enterprise" />
                 <p>CCNP – Cisco Certified Network Professional Enterprise</p>
             </div>
-            <div class="cert-card card-hover">
-                <img class="cert-img" src="cert_devnet_associate.png" alt="DevNet Associate" />
+            <div class="cert-card" onclick="openModal(this)">
+                <div class="cert-label">Certificate</div>
+                <img src="cert_devnet_associate.png" alt="DevNet Associate" />
                 <p>DevNet – Cisco DevNet Associate</p>
             </div>
-            <div class="cert-card card-hover">
-                <img class="cert-img" src="cert_cyberops_associate.png" alt="CyberOps Associate" />
+            <div class="cert-card" onclick="openModal(this)">
+                <div class="cert-label">Certificate</div>
+                <img src="cert_cyberops_associate.png" alt="CyberOps Associate" />
                 <p>CyberOps Associate – Cisco CyberOps</p>
             </div>
-            <div class="cert-card card-hover">
-                <img class="cert-img" src="cert_introduction_to_cybersecurity.png" alt="Introduction to Cybersecurity" />
+            <div class="cert-card" onclick="openModal(this)">
+                <div class="cert-label">Certificate</div>
+                <img src="cert_introduction_to_cybersecurity.png" alt="Introduction to Cybersecurity" />
                 <p>Introduction to Cybersecurity – Cisco</p>
             </div>
-            <div class="cert-card card-hover">
-                <img class="cert-img" src="cert_junior_cybersecurity_analyst.png" alt="Junior Cybersecurity Analyst" />
+            <div class="cert-card" onclick="openModal(this)">
+                <div class="cert-label">Certificate</div>
+                <img src="cert_junior_cybersecurity_analyst.png" alt="Junior Cybersecurity Analyst" />
                 <p>Junior Cybersecurity Analyst – Cisco</p>
             </div>
-            <div class="cert-card card-hover">
-                <img class="cert-img" src="cert_ethical_hacker.png" alt="Ethical Hacker" />
+            <div class="cert-card" onclick="openModal(this)">
+                <div class="cert-label">Certificate</div>
+                <img src="cert_ethical_hacker.png" alt="Ethical Hacker" />
                 <p>Ethical Hacker – Cisco</p>
             </div>
-            <div class="cert-card card-hover">
-                <img class="cert-img" src="cert_cyber_threat_management.png" alt="Cyber Threat Management" />
+            <div class="cert-card" onclick="openModal(this)">
+                <div class="cert-label">Certificate</div>
+                <img src="cert_cyber_threat_management.png" alt="Cyber Threat Management" />
                 <p>Cyber Threat Management – Cisco</p>
             </div>
-            <div class="cert-card card-hover">
-                <img class="cert-img" src="cert_industrial_cybersecurity_essentials_2025.png" alt="Industrial Cybersecurity Essentials" />
+            <div class="cert-card" onclick="openModal(this)">
+                <div class="cert-label">Certificate</div>
+                <img src="cert_industrial_cybersecurity_essentials_2025.png" alt="Industrial Cybersecurity Essentials" />
                 <p>Industrial Cybersecurity Essentials (2025) – Cisco</p>
             </div>
-            <div class="cert-card card-hover">
-                <img class="cert-img" src="cert_industrial_networking_essentials_2025.png" alt="Industrial Networking Essentials" />
+            <div class="cert-card" onclick="openModal(this)">
+                <div class="cert-label">Certificate</div>
+                <img src="cert_industrial_networking_essentials_2025.png" alt="Industrial Networking Essentials" />
                 <p>Industrial Networking Essentials (2025) – Cisco</p>
             </div>
-            <div class="cert-card card-hover">
-                <img class="cert-img" src="cert_ccep.png" alt="CCEP Certificate" />
+            <div class="cert-card" onclick="openModal(this)">
+                <div class="cert-label">Certificate</div>
+                <img src="cert_ccep.png" alt="CCEP Certificate" />
                 <p>CCEP – Certified Cybersecurity Educator Professional</p>
             </div>
-            <div class="cert-card card-hover">
-                <img class="cert-img" src="cert_cisco_national_competition.png" alt="Cisco National Skill Competition" />
+            <div class="cert-card" onclick="openModal(this)">
+                <div class="cert-label">Achievement</div>
+                <img src="cert_cisco_national_competition.png" alt="Cisco National Skill Competition" />
                 <p>Finalist – Cisco National Skill Competition 2025</p>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="fade">
+    <section id="projects">
         <h2>Projects</h2>
-        <p>• C# College Management System</p>
-        <p>• C++ Graphics Train Journey Project</p>
-        <p>• Smart Water Quality Monitoring System Using Arduino for Real-time Detection of Water Quality Parameters (Microprocessor)</p>
+        <p><strong>💻 C# College Management System</strong></p>
+        <p><strong>🚂 C++ Graphics Train Journey Project</strong></p>
+        <p><strong>💧 Smart Water Quality Monitoring System</strong> - Using Arduino for Real-time Detection of Water Quality Parameters (Microprocessor)</p>
     </section>
 
-    <section id="contact" class="fade">
-        <h2>Contact Me</h2>
-        <button class="glow-btn" style="margin-top:20px;">Download CV</button>
+    <section id="contact">
+        <h2>Get In Touch</h2>
+        <button class="glow-btn" onclick="window.open('your-cv-link-here.pdf', '_blank')">Download CV</button>
         <p>Email: <strong>abidjihan1123@gmail.com</strong></p>
         <p>LinkedIn: <a href="https://www.linkedin.com/in/md-abidul-islam-1655882a6" target="_blank">md-abidul-islam</a></p>
         <p>GitHub: <a href="https://github.com/abidjihan" target="_blank">abidjihan</a></p>
     </section>
 
     <footer>
-        <p>© 2025 MD. ABIDUL ISLAM | Portfolio Website</p>
+        <p>© 2025 MD. ABIDUL ISLAM | Cybersecurity Portfolio</p>
     </footer>
 
-    <!-- Certificate Modal -->
     <div class="modal" id="certModal">
-        <span onclick="closeModal()">&times;</span>
+        <span class="modal-close" onclick="closeModal()">&times;</span>
         <img id="modalImg" src="" alt="Certificate Full View" />
     </div>
 
     <script>
-        const navLinks = document.querySelectorAll('nav a');
-        const sections = document.querySelectorAll('section');
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                sections.forEach(sec => sec.classList.remove('active'));
-                const targetId = link.getAttribute('href');
-                const target = document.querySelector(targetId);
-                target.classList.add('active');
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('nav a');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active from all
+                    document.querySelectorAll('section').forEach(sec => {
+                        sec.classList.remove('active-section');
+                    });
+                    navLinks.forEach(navLink => {
+                        navLink.classList.remove('active-link');
+                    });
+                    
+                    // Get target section
+                    const targetId = this.getAttribute('data-target');
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        // Add active class
+                        targetSection.classList.add('active-section');
+                        this.classList.add('active-link');
+                        
+                        // Smooth scroll
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
+                    }
+                });
             });
         });
 
-        const certImages = document.querySelectorAll('.cert-img');
-        const modal = document.getElementById('certModal');
-        const modalImg = document.getElementById('modalImg');
-
-        certImages.forEach(img => {
-            img.addEventListener('click', () => {
-                if(img.src && img.style.display !== 'none'){
-                    modal.style.display = 'flex';
-                    modalImg.src = img.src;
-                }
-            });
-        });
-
-        function closeModal(){
-            modal.style.display = 'none';
+        function openModal(card) {
+            const img = card.querySelector('img');
+            if(img && img.src) {
+                document.getElementById('certModal').style.display = 'flex';
+                document.getElementById('modalImg').src = img.src;
+            }
         }
 
-        modal.addEventListener('click', e => {
-            if(e.target === modal) closeModal();
+        function closeModal() {
+            document.getElementById('certModal').style.display = 'none';
+        }
+
+        document.getElementById('certModal').addEventListener('click', function(e) {
+            if(e.target === this) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if(e.key === 'Escape') closeModal();
         });
     </script>
 </body>
