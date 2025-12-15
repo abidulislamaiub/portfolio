@@ -458,6 +458,198 @@
             box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
         }
 
+        /* Floating Social Sidebar */
+        .floating-social {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 1000;
+            animation: slideInLeft 0.8s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                left: -100px;
+                opacity: 0;
+            }
+            to {
+                left: 20px;
+                opacity: 1;
+            }
+        }
+
+        .social-floating-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-floating-icon::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 75px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+        }
+
+        .social-floating-icon::after {
+            content: '';
+            position: absolute;
+            left: 65px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 6px solid transparent;
+            border-right-color: rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .social-floating-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .social-floating-icon:hover::before,
+        .social-floating-icon:hover::after {
+            opacity: 1;
+        }
+
+        .floating-linkedin {
+            background: linear-gradient(135deg, #0077b5, #005885);
+            box-shadow: 0 4px 15px rgba(0, 119, 181, 0.4);
+        }
+
+        .floating-linkedin:hover {
+            box-shadow: 0 8px 25px rgba(0, 119, 181, 0.6);
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .floating-github {
+            background: linear-gradient(135deg, #333, #24292e);
+            box-shadow: 0 4px 15px rgba(36, 41, 46, 0.4);
+        }
+
+        .floating-github:hover {
+            box-shadow: 0 8px 25px rgba(100, 100, 100, 0.6);
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .floating-tryhackme {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .floating-tryhackme:hover {
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6);
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .floating-letsdefend {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+        }
+
+        .floating-letsdefend:hover {
+            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.6);
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        /* Mobile Social Icons in Header */
+        .social-header {
+            display: none;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-header-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-header-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Footer Social Icons */
+        .social-footer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-footer-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-footer-icon:hover {
+            transform: translateY(-5px) rotate(360deg);
+        }
+
+        /* Responsive Behavior */
+        @media (max-width: 1024px) {
+            .floating-social {
+                left: 10px;
+            }
+            
+            .social-floating-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Hide floating sidebar on mobile */
+            .floating-social {
+                display: none;
+            }
+            
+            /* Show header social icons on mobile */
+            .social-header {
+                display: flex;
+            }
+        }
+
         /* Certificates Grid */
         .certificates {
             display: grid;
@@ -863,7 +1055,7 @@
     </section>
 
     <section id="skills">
-        <h2> Skills</h2>
+        <h2>Technical Skills</h2>
 
         <div class="skill-item">
             <div class="skill-header">
@@ -1241,7 +1433,11 @@
         }
 
         function startCounters() {
+            if (hasAnimatedStats) return;
+            
             const counters = document.querySelectorAll('.stat-number[data-target]');
+            if (counters.length === 0) return;
+            
             counters.forEach(counter => {
                 const target = parseInt(counter.getAttribute('data-target'));
                 animateCounter(counter, target);
@@ -1249,14 +1445,40 @@
             hasAnimatedStats = true;
         }
 
-        // Intersection Observer for scroll-triggered animation
+        function checkStatsVisibility() {
+            const statsSection = document.querySelector('.stats-section');
+            if (!statsSection) return;
+            
+            const rect = statsSection.getBoundingClientRect();
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            
+            // Check if section is in viewport
+            const isVisible = (
+                rect.top <= windowHeight &&
+                rect.bottom >= 0
+            );
+            
+            if (isVisible && !hasAnimatedStats) {
+                startCounters();
+            }
+        }
+
+        // Multiple triggers to ensure animation runs
+        window.addEventListener('load', () => {
+            setTimeout(checkStatsVisibility, 500);
+            setTimeout(checkStatsVisibility, 1500);
+        });
+
+        window.addEventListener('scroll', checkStatsVisibility);
+
+        // Intersection Observer as backup
         const statsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !hasAnimatedStats) {
                     startCounters();
                 }
             });
-        }, { threshold: 0.3 });
+        }, { threshold: 0.1 });
 
         const statsSection = document.querySelector('.stats-section');
         if (statsSection) {
@@ -1363,5 +1585,3 @@
     </script>
 </body>
 </html>
-
-
