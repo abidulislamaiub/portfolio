@@ -995,19 +995,32 @@
             I am a B.Sc. in CSE student at American International University–Bangladesh (AIUB), focusing on cybersecurity, networking, and emerging technologies. My experience includes completing several Cisco certification programs and participating in hands-on projects that enhance practical understanding of security and network systems.
         </p>
         <h3>Course Completion</h3>
-        <ol>
-            <li>CCNA – Cisco Certified Network Associate</li>
-            <li>CCNP – Cisco Certified Network Professional</li>
-            <li>DevNet – Cisco DevNet Associate</li>
-            <li>CyberOps Associate – Cisco CyberOps</li>
-            <li>Introduction to Cybersecurity – Cisco</li>
-            <li>Junior Cybersecurity Analyst – Cisco</li>
-            <li>Ethical Hacker – Cisco</li>
-            <li>Cyber Threat Management – Cisco</li>
-            <li>Industrial Cybersecurity Essentials (2025) – Cisco</li>
-            <li>Industrial Networking Essentials (2025) – Cisco</li>
-            <li>CCEP – Certified Cybersecurity Educator Professional</li>
-        </ol>
+<ol style="line-height:1.8; font-size:1.05rem;">
+    <li>CCNA – Cisco Certified Network Associate</li>
+    <li>CCNP – Cisco Certified Network Professional</li>
+    <li>DevNet – Cisco DevNet Associate</li>
+    <li>CyberOps Associate – Cisco CyberOps</li>
+    <li>Introduction to Cybersecurity – Cisco</li>
+    <li>Junior Cybersecurity Analyst – Cisco</li>
+    <li>Ethical Hacker – Cisco</li>
+    <li>Cyber Threat Management – Cisco</li>
+    <li>Industrial Cybersecurity Essentials (2025) – Cisco</li>
+    <li>Industrial Networking Essentials (2025) – Cisco</li>
+    <li>CCEP – Certified Cybersecurity Educator Professional</li>
+    
+    <!-- Hidden courses (initially) -->
+    <div id="moreCourses" style="display: none;">
+        <li>Certified Red Team Operations Management (CRTOM) – RED TEAM LEADERS</li>
+        <li>Certified Threat Intelligence & Governance Analyst (CTIGA) – RED TEAM LEADERS</li>
+        <li>Certified Phishing Prevention Specialist (CPPS) – Hack&Fix</li>
+        <li>CRPO (Certified Ransomware Protection Officer) – EU Cyber Academy</li>
+        <li>ISO/IEC 42001:2023 – Lead Auditor</li>
+    </div>
+</ol>
+
+<!-- See More Button -->
+<button onclick="toggleCourses()" id="seeMoreBtn" class="glow-btn" style="margin-top: 15px;">See More</button>
+  
     </section>
 
     <section id="education">
@@ -1602,9 +1615,23 @@ leaderboard in Let's Defend</strong></p>
                 modalImg.src = profilePic.src;
             });
         }
+         // Toggle course visibility
+        function toggleCourses() {
+            const moreCourses = document.getElementById('moreCourses');
+            const btn = document.getElementById('seeMoreBtn');
+            
+            if (moreCourses.style.display === 'none') {
+                moreCourses.style.display = 'block';
+                btn.textContent = 'See Less';
+            } else {
+                moreCourses.style.display = 'none';
+                btn.textContent = 'See More';
+            }
+        }
     </script>
 </body>
 </html>
+
 
 
 
