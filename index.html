@@ -957,6 +957,12 @@
             section { padding: 30px 20px; margin: 20px; }
             .certificates { grid-template-columns: 1fr; }
         }
+         /* Profile Picture Clickable */
+        .profile-clickable:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(52, 152, 219, 0.8);
+            transition: all 0.3s;
+        }
     </style>
 </head>
 <body>
@@ -1585,9 +1591,21 @@ leaderboard in Let's Defend</strong></p>
         document.addEventListener('keydown', function(e) {
             if(e.key === 'Escape') closeModal();
         });
+          // Profile picture click to enlarge
+        const profilePic = document.querySelector('.profile-clickable');
+
+        if (profilePic) {
+            profilePic.addEventListener('click', () => {
+                const modal = document.getElementById('certModal');
+                const modalImg = document.getElementById('modalImg');
+                modal.style.display = 'flex';
+                modalImg.src = profilePic.src;
+            });
+        }
     </script>
 </body>
 </html>
+
 
 
 
