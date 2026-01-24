@@ -214,17 +214,28 @@
             scroll-margin-top: 80px;
         }
 
-        section {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 50px 40px;
-            background: rgba(26, 31, 58, 0.75);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(52, 152, 219, 0.2);
-            transition: all 0.3s;
-        }
+      section {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 50px 40px;
+    background: rgba(26, 31, 58, 0.75);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(52, 152, 219, 0.2);
+    transition: all 0.3s;
+    
+    /* Scroll Animation - Initial state */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.3s, border-color 0.3s;
+}
+
+/* When section becomes visible */
+section.scroll-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
         section:hover {
             transform: translateY(-5px);
@@ -1937,9 +1948,58 @@ leaderboard in Let's Defend</strong></p>
                 btn.textContent = 'See More';
             }
         }
+        
+// ============================================
+// SCROLL ANIMATIONS - ADD THIS ENTIRE BLOCK HERE
+// ============================================
+
+// Function to check if element is in viewport
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    
+    // Element is considered visible when 15% of it is in viewport
+    const elementHeight = rect.height;
+    const visibleThreshold = elementHeight * 0.15;
+    
+    return (
+        rect.top <= windowHeight - visibleThreshold &&
+        rect.bottom >= visibleThreshold
+    );
+}
+
+// Function to handle scroll animations
+function handleScrollAnimation() {
+    const sections = document.querySelectorAll('section');
+    
+    sections.forEach(section => {
+        if (isInViewport(section)) {
+            section.classList.add('scroll-visible');
+        }
+    });
+}
+
+// Run on page load
+window.addEventListener('load', handleScrollAnimation);
+
+// Run on scroll with throttling for performance
+let scrollTimeout;
+window.addEventListener('scroll', () => {
+    if (scrollTimeout) {
+        window.cancelAnimationFrame(scrollTimeout);
+    }
+    
+    scrollTimeout = window.requestAnimationFrame(() => {
+        handleScrollAnimation();
+    });
+});
+
+// Initial check
+handleScrollAnimation();
     </script>
 </body>
 </html>
+
 
 
 
